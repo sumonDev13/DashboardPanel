@@ -1,5 +1,9 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
+import Chart from "./chart";
+import DummyTable from "./table";
+import '../App.css'
+
 
 const Dashboard = () => {
   const [userInfo, setUserInfo] = useState({});
@@ -23,7 +27,7 @@ const Dashboard = () => {
       <div style={{ textAlign: "center" }}>
         <h1>Dashboard</h1>
       </div>
-      <div className="dash-container" style={{display:'flex',flexDirection:'row'}}>
+      <div className="dash-container">
         <div className="user-info">
           <h2>User Information</h2>
           <p>First Name: {userInfo.firstName}</p>
@@ -33,7 +37,10 @@ const Dashboard = () => {
           <p>Phone: {userInfo.phone}</p>
         </div>
         <div className="chart">
-            chart
+            <Chart/>
+        </div>
+        <div className="table">
+            <DummyTable/>
         </div>
       </div>
     </div>

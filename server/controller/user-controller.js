@@ -2,6 +2,7 @@ import User from "../model/user-schema.js";
 import bcrypt from "bcrypt";
 import jwt from 'jsonwebtoken'
 
+
 export const userSignUp = async (request, response) => {
   try {
     const exist = await User.findOne({ username: request.body.username });
