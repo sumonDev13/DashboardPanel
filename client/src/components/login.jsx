@@ -1,6 +1,7 @@
 import  { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 
 import '../App.css'
@@ -24,12 +25,24 @@ const Login = () => {
         
         const token = response.data.token;
         sessionStorage.setItem("token", token);
+        toast.info("Login successful!", {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "colored",
+        }); 
         navigate('/dashboard') 
      
       }
     } catch (error) {
-      // Handle login error, e.g., display an error message to the user
       console.error('Login failed:', error.message);
+      toast.info("invalid credentials",{
+        theme:"colored"
+      })
     }
   };
   

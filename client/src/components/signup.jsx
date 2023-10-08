@@ -2,6 +2,7 @@ import  { useState } from 'react';
 import '../App.css';
 import axios from 'axios';
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 
 const Signup = () => {
@@ -24,6 +25,16 @@ const Signup = () => {
         
         // const token = response.data;
         // // sessionStorage.setItem("token", token);
+        toast.info("account created successfully!", {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "colored",
+        }); 
         navigate('/login') 
         
      
