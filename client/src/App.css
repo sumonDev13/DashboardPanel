@@ -1,0 +1,11 @@
+.home h1{
+    text-align: center;
+}
+button{
+    background:#03a9f4 ;
+    color : #fff !important;
+    border-radius: 2px;
+    border: none!important;
+    padding:5px  8px;;
+    
+}
