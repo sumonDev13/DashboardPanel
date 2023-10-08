@@ -1,18 +1,39 @@
 import  { useState } from 'react';
 import '../App.css';
+import axios from 'axios';
+import { useNavigate } from "react-router-dom";
+
 
 const Signup = () => {
+  const navigate = useNavigate();
+    
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Add your signup logic here
-    console.log('Username:', username);
-    console.log('Email:', email);
-    console.log('Password:', password);
+  
+    try {
+      const response = await axios.post('http://localhost:5000/api/signup', {
+        username,
+        email,
+        password,
+      });
+  
+      if (response.data) {
+        
+        // const token = response.data;
+        // // sessionStorage.setItem("token", token);
+        navigate('/login') 
+        
+     
+      }
+    } catch (error) {
+      // Handle signup error, e.g., display an error message to the user
+      console.error('Signup failed:', error.message);
+    }
   };
+  
 
   return (
     <div className="signup-form">

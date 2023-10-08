@@ -24,9 +24,7 @@ const Login = () => {
         
         const token = response.data.token;
         sessionStorage.setItem("token", token);
-        navigate('/dashboard')
-        
-       
+        navigate('/dashboard') 
      
       }
     } catch (error) {
@@ -34,12 +32,6 @@ const Login = () => {
       console.error('Login failed:', error.message);
     }
   };
-
-  
-  
-  
-  
-  
   
 
   return (
@@ -47,7 +39,7 @@ const Login = () => {
       <h2>Login</h2>
       <form onSubmit={handleSubmit}>
         <div className="form-group">
-          <label htmlFor="email">Email</label>
+          <label htmlFor="email">User Name</label>
           <input
             type="text"
             id="username"
