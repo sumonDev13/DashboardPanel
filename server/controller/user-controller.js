@@ -58,17 +58,17 @@ export const userLogin = async (request, response) => {
 
 
 
-// Get user details
+
 export const getUserDetails = async (req, res) => {
   try {
     const userId = req.params.userId;
-    // Ensure that the userId is valid (e.g., MongoDB ObjectId)
+    
     if (!isValidObjectId(userId)) {
       return res.status(400).json({ error: 'Invalid userId' });
     }
 
-    // Fetch user details by userId
-    const user = await User.findById(userId, { password: 0 }); // Exclude the password field
+    
+    const user = await User.findById(userId, { password: 0 });
 
     if (!user) {
       return res.status(404).json({ error: 'User not found' });
