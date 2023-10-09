@@ -35,7 +35,8 @@ const Login = () => {
           progress: undefined,
           theme: "colored",
         }); 
-        navigate('/dashboard') 
+        navigate(`/dashboard?username=${username}`);
+
      
       }
     } catch (error) {

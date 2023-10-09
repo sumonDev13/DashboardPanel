@@ -2,11 +2,14 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import Chart from "./chart";
 import DummyTable from "./table";
+import { useLocation } from 'react-router-dom';
 import '../App.css'
 
 
 const Dashboard = () => {
   const [userInfo, setUserInfo] = useState({});
+  const location = useLocation();
+  const username = new URLSearchParams(location.search).get('username');
 
   useEffect(() => {
     // Define a function to fetch user information
@@ -26,12 +29,12 @@ const Dashboard = () => {
     <div>
       <div style={{ textAlign: "center" }}>
         <h1>Dashboard</h1>
+        <h2>Welcome to your Dashboard, {username}!</h2>
       </div>
       <div className="dash-container">
         <div className="user-info">
           <h2>User Information</h2>
-          <p>First Name: {userInfo.firstName}</p>
-          <p>Last Name: {userInfo.lastName}</p>
+          <p> Name: {username}</p>
           <p>age: {userInfo.age}</p>
           <p>University: {userInfo.university}</p>
           <p>Phone: {userInfo.phone}</p>
