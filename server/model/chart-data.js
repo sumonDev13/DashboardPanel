@@ -1,7 +1,7 @@
 // models/ChartData.js
 const chartData = [
   {
-    day: "jan",
+    day: "Jan",
     cost: 25,
   },
   {
@@ -33,21 +33,15 @@ const chartData = [
     cost: 70,
   },
   {
-    day: "Sept",
+    day: "Sep",
     cost: 50,
   },
   {
     day: "Oct",
-    cost: 40,
+    cost: 50,
   },
-  {
-    day: "Nov",
-    cost: 20,
-  },
-  {
-    day: "Dec",
-    cost: 35,
-  },
+
+
 ];
 
 export default chartData;
