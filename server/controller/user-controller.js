@@ -55,3 +55,29 @@ export const userLogin = async (request, response) => {
     return response.status(500).json({"server error": error.message});
   }
 };
+
+
+
+// Get user details
+export const getUserDetails = async (req, res) => {
+  try {
+    const userId = req.params.userId;
+    // Ensure that the userId is valid (e.g., MongoDB ObjectId)
+    if (!isValidObjectId(userId)) {
+      return res.status(400).json({ error: 'Invalid userId' });
+    }
+
+    // Fetch user details by userId
+    const user = await User.findById(userId, { password: 0 }); // Exclude the password field
+
+    if (!user) {
+      return res.status(404).json({ error: 'User not found' });
+    }
+
+    res.status(200).json({ user });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: 'Internal server error' });
+  }
+};
+
