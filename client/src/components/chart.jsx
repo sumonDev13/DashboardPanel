@@ -8,7 +8,7 @@ const Chart = () => {
 
   useEffect(() => {
     // Make an API call to your Express.js API endpoint
-    axios.get('http://localhost:5000/api/chart-data')
+    axios.get('http://localhost:5000/api/products')
       .then(response => {
         // Handle the received chart data here
         setChartData(response.data);
@@ -37,7 +37,7 @@ const Chart = () => {
       </div>
 
       <BarChart data={chartData} width={400} height={150}>
-        <XAxis dataKey="day" stroke="#000000" fontSize="12px" />
+        <XAxis dataKey="title" stroke="#000000" fontSize="12px" />
         <YAxis
           tickFormatter={(tick) => `$${tick}`}
           stroke="#000000"
@@ -45,7 +45,7 @@ const Chart = () => {
           color="#333333"
         />
         <Bar
-          dataKey="cost"
+          dataKey="price"
           fill="#FD4438"
           barSize={20}
           color="#333333"
