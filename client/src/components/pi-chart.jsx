@@ -1,48 +1,43 @@
-import  { useState, useEffect } from "react";
-import { PieChart, Pie, Cell, Legend } from "recharts";
+import React, { useState, useEffect } from "react";
+import Chart from "react-apexcharts";
 import axios from "axios";
 
-
-const COLORS = ["#8884d8", "#82ca9d", "#FFBB28", "#FF8042", "#AF19FF"];
-
-
-const PieRechartComponent = () => {
-  const [pieData, setPieData] = useState([]);
+function Piechart() {
+  const [chartData, setChartData] = useState([]);
 
   useEffect(() => {
-    // Make an API call to your Express.js API endpoint for pie chart data
-    axios.get('http://localhost:5000/api/products')
-      .then(response => {
-        setPieData(response.data);
+    axios
+      .get("http://localhost:5000/api/products")
+      .then((response) => {
+        const data = response.data.map((item) => ({
+          title: item.title,
+          price: parseFloat(item.price),
+        }));
+
+        setChartData(data);
       })
-      .catch(error => {
+      .catch((error) => {
         console.error(error);
       });
-      console.log()
   }, []);
 
   return (
-    <PieChart width={930} height={300}>
-      <Pie
-        data={pieData}
-        color="#000000"
-        dataKey="title"
-        nameKey="price"
-        cx="50%"
-        cy="50%"
-        outerRadius={120}
-        fill="#8884d8"
-      >
-        {pieData.map((entry, index) => (
-          <Cell
-            key={`cell-${index}`}
-            fill={COLORS[index % COLORS.length]}
-          />
-        ))}
-      </Pie>
-      <Legend />
-    </PieChart>
+    <React.Fragment>
+      <div className="container-fluid mb-3">
+        <h2 className="mt-3">Pie-chart</h2>
+        <Chart
+          type="pie"
+          width={649}
+          height={250}
+          series={chartData.map((item) => item.price)}
+          options={{
+            colors: ["#f90000", "#f0f", "#0c5a90", "#83b130", "#ffde01"],
+            labels: chartData.map((item) => item.title),
+          }}
+        ></Chart>
+      </div>
+    </React.Fragment>
   );
-};
+}
 
-export default PieRechartComponent;
+export default Piechart;

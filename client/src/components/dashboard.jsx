@@ -3,7 +3,7 @@
 import Chart from "./chart";
 import { useLocation } from 'react-router-dom';
 import '../App.css'
-import PieRechartComponent from "./pi-chart";
+import Piechart from "./pi-chart";
 
 
 const Dashboard = () => {
@@ -36,7 +36,7 @@ const Dashboard = () => {
             <Chart/>
         </div>
         <div className="table">
-            <PieRechartComponent/>
+            <Piechart/>
         </div>
       </div>
     </div>

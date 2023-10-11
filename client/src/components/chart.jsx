@@ -32,7 +32,7 @@ const Chart = () => {
     <div>
       <div className="weekly-spend-categories-container-content">
         <div>
-          <h2 className="subheading">Balance sheet</h2>
+          <h2 className="subheading">Bar-Chart</h2>
         </div>
       </div>
 
