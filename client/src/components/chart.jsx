@@ -1,24 +1,22 @@
-import  { useEffect, useState } from 'react';
-import axios from 'axios';
+import { useEffect, useState } from "react";
+import axios from "axios";
 import { Bar, BarChart, Cell, XAxis, YAxis } from "recharts";
 
 const Chart = () => {
-
   const [chartData, setChartData] = useState([]);
 
   useEffect(() => {
     // Make an API call to your Express.js API endpoint
-    axios.get('http://localhost:5000/api/products')
-      .then(response => {
-        // Handle the received chart data here
+    axios
+      .get("http://localhost:5000/api/products")
+      .then((response) => {
         setChartData(response.data);
       })
-      .catch(error => {
+      .catch((error) => {
         console.error(error);
       });
-  }, []); // Empty dependency array to ensure the API call is made once on component mount
+  }, []);
 
-  
   const barColors = [
     "#FD4438",
     "#452F02",

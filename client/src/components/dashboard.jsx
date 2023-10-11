@@ -1,46 +1,71 @@
-// import { useEffect } from "react";
-// import axios from "axios";
 import Chart from "./chart";
-import { useLocation } from 'react-router-dom';
-import '../App.css'
+import { useLocation } from "react-router-dom";
+import { useState } from "react";
+import "../App.css";
 import Piechart from "./pi-chart";
 import Linechart from "./line-chart";
-
+import InputForm from "./input-form";
 
 const Dashboard = () => {
-  // const [userInfo, setUserInfo] = useState({});
   const location = useLocation();
-  const username = new URLSearchParams(location.search).get('username');
+  const username = new URLSearchParams(location.search).get("username");
 
-  // useEffect(() => {
-  //   // Define a function to fetch user information
-  //   const fetchUserInfo = async () => {
-  //     try {
-  //       const response = await axios.get("https://dummyjson.com/users/1"); // Replace with your API endpoint
-  //       setUserInfo(response.data);
-  //     } catch (error) {
-  //       console.error("Error fetching user information:", error);
-  //     }
-  //   };
+  const [isModalOpen, setModalOpen] = useState(false);
+  const [showInputFormInModal, setShowInputFormInModal] = useState(false);
 
-  //   fetchUserInfo();
-  // }, []);
+  const openModal = () => {
+    setModalOpen(true);
+    setShowInputFormInModal(true);
+  };
+
+  const closeModal = () => {
+    setModalOpen(false);
+    setShowInputFormInModal(false);
+    window.location.reload();
+  };
 
   return (
     <div>
-      <div style={{ textAlign: "center",padding:"40px" }}>
+      <div style={{ textAlign: "center", padding: "40px" }}>
         <h1>Dashboard</h1>
         <h2>Welcome to your Dashboard, {username}!</h2>
+        <div>
+          <div style={{alignItems:'center'}}>
+          <button style={{width:'auto'}} onClick={openModal}>Add Product Details</button>
+          </div>
+          
+          {isModalOpen && (
+            <div style={{ padding: "20px" }} className="modal">
+              <div className="modal-dialog">
+                <div className="modal-content">
+                  <div className="modal-header">
+                    <button
+                      style={{ width: "40px" }}
+                      type="button"
+                      className="close"
+                      onClick={closeModal}
+                    >
+                      <span>&times;</span>
+                    </button>
+                  </div>
+                  {showInputFormInModal && (
+                    <InputForm closeModal={closeModal} />
+                  )}
+                </div>
+              </div>
+            </div>
+          )}
+        </div>
       </div>
       <div className="dash-container">
         <div className="chart">
-            <Chart/>
+          <Chart />
         </div>
         <div className="chart">
-            <Linechart/>
+          <Linechart />
         </div>
         <div className="table">
-            <Piechart/>
+          <Piechart />
         </div>
       </div>
     </div>
