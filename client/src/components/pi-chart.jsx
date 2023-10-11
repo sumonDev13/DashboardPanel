@@ -27,7 +27,7 @@ function Piechart() {
         <h2 className="mt-3">Pie-chart</h2>
         <Chart
           type="pie"
-          width={649}
+          width={390}
           height={250}
           series={chartData.map((item) => item.price)}
           options={{

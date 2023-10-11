@@ -4,6 +4,7 @@ import Chart from "./chart";
 import { useLocation } from 'react-router-dom';
 import '../App.css'
 import Piechart from "./pi-chart";
+import Linechart from "./line-chart";
 
 
 const Dashboard = () => {
@@ -27,13 +28,16 @@ const Dashboard = () => {
 
   return (
     <div>
-      <div style={{ textAlign: "center" }}>
+      <div style={{ textAlign: "center",padding:"40px" }}>
         <h1>Dashboard</h1>
         <h2>Welcome to your Dashboard, {username}!</h2>
       </div>
       <div className="dash-container">
         <div className="chart">
             <Chart/>
+        </div>
+        <div className="chart">
+            <Linechart/>
         </div>
         <div className="table">
             <Piechart/>

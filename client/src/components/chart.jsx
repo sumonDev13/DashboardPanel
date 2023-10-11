@@ -36,7 +36,7 @@ const Chart = () => {
         </div>
       </div>
 
-      <BarChart data={chartData} width={400} height={150}>
+      <BarChart data={chartData} width={390} height={250}>
         <XAxis dataKey="title" stroke="#000000" fontSize="12px" />
         <YAxis
           tickFormatter={(tick) => `$${tick}`}
