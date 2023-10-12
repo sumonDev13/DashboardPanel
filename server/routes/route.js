@@ -21,4 +21,5 @@ router.get("/products", getProducts);
 router.post("/createProduct", createProduct);
 router.put("/updateProduct/:id", updateProduct);
 
+
 export default router;

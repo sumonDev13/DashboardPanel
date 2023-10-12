@@ -23,6 +23,73 @@ app.use('/api',Router);
 
 
 
+import Conversations from "./model/conversations.js";
+import Messages from "./model/messages-schema.js";
+import User from "./model/user-schema.js";
+
+
+app.post('/api/conversation', async (req, res) => {
+    try {
+        const { senderId, receiverId } = req.body;
+        const newCoversation = new Conversations({ members: [senderId, receiverId] });
+        await newCoversation.save();
+        res.status(200).send('Conversation created successfully');
+    } catch (error) {
+        console.log(error, 'Error')
+    }
+})
+
+
+app.get('/api/conversations/:userId', async (req, res) => {
+    try{
+        const conversations = await Conversations.find({members : {$in:[req.params.userId]} })
+        .populate({ path: 'messages', match: { userId: req.params.userId }, options: { sort: {createdAt
+            :-1} }})
+            res.status(200).send(conversations[0])
+            }catch(err){
+                console.log(err,'Error in getting conversation list')
+                };
+})
+
+
+
+app.post('/api/message', async (req, res) => {
+    try {
+        const { conversationId, senderId, message, receiverId = '' } = req.body;
+        if (!senderId || !message) return res.status(400).send('Please fill all required fields')
+        if (conversationId === 'new' && receiverId) {
+            const newCoversation = new Conversations({ members: [senderId, receiverId] });
+            await newCoversation.save();
+            const newMessage = new Messages({ conversationId: newCoversation._id, senderId, message });
+            await newMessage.save();
+            return res.status(200).send('Message sent successfully');
+        } else if (!conversationId && !receiverId) {
+            return res.status(400).send('Please fill all required fields')
+        }
+        const newMessage = new Messages({ conversationId, senderId, message });
+        await newMessage.save();
+        res.status(200).send('Message sent successfully');
+    } catch (error) {
+        console.log(error, 'Error')
+    }
+})
+
+app.get('/api/users', async (req, res) => {
+    try {
+        const userId = req.params.userId;
+        const users = await User.find({ _id: { $ne: userId } });
+        const usersData = Promise.all(users.map(async (user) => {
+            return { user: { email: user.email, username: user.username, receiverId: user._id } }
+        }))
+        res.status(200).json(await usersData);
+    } catch (error) {
+        console.log('Error', error)
+    }
+})
+
+
+
+
 const USERNAME = process.env.DB_USERNAME;
 const PASSWORD = process.env.DB_PASSWORD;
 
