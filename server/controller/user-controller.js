@@ -37,7 +37,9 @@ export const userLogin = async (request, response) => {
         if (passwordMatch) {
 
             const genToken = jwt.sign({ userID: user._id },process.env.JWT_SECRET, { expiresIn: "1h" });
-            return response.status(200).json({ token:genToken});
+            user.save();
+            return response.status(200).json({ user: { id: user._id, email: user.email, username: user.username }, token: genToken })
+            
         } else {
             return response.status(401).json({message:"invalid login credentials"});
         }
