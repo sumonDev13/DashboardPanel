@@ -13,9 +13,7 @@ router.post("/signup", userSignUp);
 router.post("/login", userLogin);
 
 router.get("/user/:userId", authenticateUser, getUserDetails);
-router.get("/chart-data", (req, res) => {
-  res.json(chartData);
-});
+
 
 router.get("/products", getProducts);
 router.post("/createProduct", createProduct);
